@@ -150,5 +150,5 @@ MIT — same as the original gstack.
 ## Credits
 
 - Original gstack by [Garry Tan](https://x.com/garrytan), President & CEO of Y Combinator
-- Port + cross-agent refactor by [zinou-potts](https://github.com/zinou-potts)
+- Port + cross-agent refactor by [TalonForgeHQ](https://github.com/TalonForgeHQ)
 - Inspired by the broader movement toward vendor-neutral AI tooling
