@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+
+# Node / Bun (in case anyone adds JS tooling)
+node_modules/
+.pnp.*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temp / scratch
+*.bak
+*.orig
+*.tmp
+*.log
+
+# Install script temp dirs (created by mktemp -d)
+.openagents-install-tmp/
+
+# Local override files
+.env
+.env.local
+.env.*.local
