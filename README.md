@@ -134,16 +134,30 @@ rm -rf ~/.hermes/skills/*/references/
 This brings the install down from ~3.5 MB to ~1.2 MB without affecting
 any skill functionality.
 
-For an even smaller install (just the 11 production skills, no stubs
-and no upstream refs), cherry-pick:
+For an even smaller install (just the 11 production skills, no stubs,
+no upstream refs), cherry-pick per skill into a fresh dir:
 
 ```bash
+# Fresh install of only the production skills
+TMP=$(mktemp -d)
+git clone --depth=1 --branch main \
+  https://github.com/TalonForgeHQ/openagents-skills \
+  "$TMP/openagents-skills"
+
+DEST=~/.hermes/skills
+mkdir -p "$DEST"
 for dir in office-hours spec investigate qa scrape retro ship review \
            plan-ceo-review plan-eng-review plan-design-review; do
-  cp -r ~/.hermes/skills/\$dir ~/.hermes/skills/
+  cp -r "$TMP/openagents-skills/skills/$dir" "$DEST/"
 done
-rm -rf ~/.hermes/skills/canary ~/.hermes/skills/autoplan ...
+rm -rf "$TMP/openagents-skills"
+
+# Optional: also strip upstream references
+rm -rf "$DEST"/*/references/
 ```
+
+This installs only the production skills with no stubs, no upstream
+references — about 50 KB total.
 
 ## Contributing
 
