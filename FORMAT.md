@@ -71,7 +71,26 @@ Where this came from (link to original, attribution).
 | `agent-task` | `delegate_task` | `Agent` | `codex-subagent` | `composer` | (none) |
 | `browser` | `browser_*` | `WebFetch`/`WebSearch`/`mcp:*browser*` | `browser` | `browser` | `browser` |
 
-Each install script in [install/](install/) does the mapping.
+## How tool names map at install time
+
+Skill frontmatter uses canonical names (`bash`, `read`, etc.). Each agent
+loads skills by reading the SKILL.md file and matching its own loader:
+
+- **Hermes Agent**: canonical names match native tool names directly
+  (`read` → `read_file`, `grep` → `search_files`, etc. — Hermes has a
+  name aliasing layer that maps the canonical name onto its internal
+  tool identifier)
+- **Claude Code / Codex / Cursor**: each agent's loader maps canonical
+  names onto its own tools via lookup tables. If a canonical name has
+  no equivalent in the target agent, the loader issues a warning and
+  drops the tool from `allowed-tools` for that agent.
+- **Aider / bare LLM**: no tool layer — the agent must interpret the
+  canonical names literally and translate them to its own tools.
+
+The install scripts in [install/](install/) only clone + copy. The
+mapping happens at skill-load time inside each agent. To customize,
+override one agent's name table — see the per-skill
+`Customization` section.
 
 ## File layout
 

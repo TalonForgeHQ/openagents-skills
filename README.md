@@ -124,15 +124,26 @@ section tells you what to replace when you port it.
 
 ## Slim install
 
-If you don't need the upstream references (each is 50-100KB), delete
-them after install:
+If you don't need the upstream references (they're 60-90% of the install
+size), delete them after install:
 
 ```bash
 rm -rf ~/.hermes/skills/*/references/
 ```
 
-This brings the install down from ~2.6 MB to ~150 KB without affecting
+This brings the install down from ~3.5 MB to ~1.2 MB without affecting
 any skill functionality.
+
+For an even smaller install (just the 11 production skills, no stubs
+and no upstream refs), cherry-pick:
+
+```bash
+for dir in office-hours spec investigate qa scrape retro ship review \
+           plan-ceo-review plan-eng-review plan-design-review; do
+  cp -r ~/.hermes/skills/\$dir ~/.hermes/skills/
+done
+rm -rf ~/.hermes/skills/canary ~/.hermes/skills/autoplan ...
+```
 
 ## Contributing
 
